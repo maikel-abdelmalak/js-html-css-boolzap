@@ -7,19 +7,21 @@
 main{
     height: 100vh;
     background: linear-gradient(0deg, rgba(210,212,201,1) 85%, rgba(53,134,117,1) 85%);
-    padding: 30px 0;
+    padding: 20px 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 
 .container{
-    width: 80%;
+    /* width: 80%; */
+    width: 1220px;
     height: 100%;
     margin: auto;
     background-color: white;
 }
 
 .header{
-    height: 55px;
+    height: 60px;
     background-color: #eaeaea;
     padding-left: 7px;
     padding-right: 20px;
@@ -32,6 +34,7 @@ main{
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    background-color: #fff;
 }
 .avatar img{
     object-fit: cover;
@@ -40,7 +43,7 @@ main{
     border-radius: 50%;
 }
 
-.avatar{
+.header .avatar{
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -63,8 +66,73 @@ main{
     float: left;
     width: 35%;
     height: 100%;
-    border-right:1px solid #e9ebea;
+    border-right: 1px solid  #dadada;
 }
+
+.account{
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.notifiche{
+    background-color: #8edafc;
+    color: #8edafc;
+}
+
+.notifiche .account-name p:first-child{
+    color: black;
+    font-size: 15px;
+}
+
+.notifiche .account-name a{
+    color: #333;
+}
+
+.notifiche .avatar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cerca-container{
+    background-color: #fbfbfb;
+    padding: 5px;
+}
+.cerca{
+    background-color: #fff;
+    color: #dadada;
+    font-size: 14px;
+    height: 30px;
+}
+
+.cerca span{
+    display: inline-block;
+    height: 100%;
+    padding: 8px 20px;
+    border-right:1px solid #dadada;
+}
+
+.cerca input{
+    padding-left: 5px;
+    border:none;
+    color:#b1b1b1;
+}
+
+.cerca input:focus{
+    outline: none;
+}
+
+.contact-container{
+    overflow-y: scroll;
+    height: calc(100% - 170px);
+}
+
+.contact-container .account{
+    border-top: 1px solid #dadada;
+}
+
 
 #chat{
     float: left;
@@ -72,11 +140,17 @@ main{
     height: 100%;
 }
 
+
+
 .chat-header-left .avatar{
     display: inline-block;
 }
 .account-name{
     display: inline-block;
     margin-left: 15px;
+}
+
+.account-name p:last-child, .ora{
     color: #b1b1b1;
+    font-size: 14px;
 }
