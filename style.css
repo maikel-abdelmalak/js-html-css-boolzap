@@ -112,6 +112,7 @@ main{
     height: 100%;
     padding: 8px 20px;
     border-right:1px solid #dadada;
+    cursor: pointer;
 }
 
 .cerca input{
@@ -140,8 +141,6 @@ main{
     height: 100%;
 }
 
-
-
 .chat-header-left .avatar{
     display: inline-block;
 }
@@ -153,4 +152,60 @@ main{
 .account-name p:last-child, .ora{
     color: #b1b1b1;
     font-size: 14px;
+}
+
+.text-container{
+    height: calc(100% - 120px);
+    background-image: url(img/chat-bg.jpg);
+    background-size: contain;
+    overflow-y: scroll;
+    padding: 40px 60px 20px;
+}
+
+.messaggio{
+    padding: 10px;
+    border-radius: 5px;
+    clear: both;
+    margin-bottom: 20px;
+    max-width: 40%;
+}
+
+.inviati{
+    background-color: #fff;
+    float: left;
+}
+
+.ricevuti{
+    background-color: #d5f9bc;
+    float: right;
+}
+
+.bottom{
+    height: 60px;
+    background-color: #f3eeea;
+    display: flex;
+    padding:  30px;
+    align-items: center;
+    justify-content: space-between;
+    color:#687076;
+    font-size: 20px;
+
+}
+
+.bottom input{
+    border: none;
+    margin: 0 30px;
+    flex-grow: 2;
+    height: 38px;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+
+.bottom input:focus{
+    outline: none;
+
+}
+
+.invisible{
+    display: none !important;
 }
