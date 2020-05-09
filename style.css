@@ -35,6 +35,7 @@ main{
     height: 50px;
     border-radius: 50%;
     background-color: #fff;
+    cursor: pointer;
 }
 .avatar img{
     object-fit: cover;
@@ -149,7 +150,7 @@ main{
     margin-left: 15px;
 }
 
-.account-name p:last-child, .ora{
+.account-name p:last-child{
     color: #b1b1b1;
     font-size: 14px;
 }
@@ -163,22 +164,55 @@ main{
 }
 
 .messaggio{
-    padding: 10px;
+    padding: 10px 10px 5px;
     border-radius: 5px;
     clear: both;
     margin-bottom: 20px;
     max-width: 40%;
+    min-width: 100px;
+    position: relative;
 }
 
-.inviati{
+.ricevuti::before{
+    content: "";
+    position: absolute;
+    left: -22px;
+    bottom: 4px;
+    border-top: 10px solid #fff;
+    border-left: 33px solid transparent;
+}
+
+.inviati::before{
+    content: "";
+    position: absolute;
+    right: -22px;
+    bottom: 4px;
+    border-top: 10px solid #d5f9bc;
+    border-right: 33px solid transparent;
+}
+
+
+.ricevuti{
     background-color: #fff;
     float: left;
 }
 
-.ricevuti{
+.inviati{
     background-color: #d5f9bc;
     float: right;
 }
+
+.info-ms{
+    color: #b1b1b1;
+    font-size:12px;
+    text-align: right;
+    margin-top: 5px;
+}
+
+.letto{
+    color:#8edafc;
+}
+
 
 .bottom{
     height: 60px;
@@ -204,6 +238,10 @@ main{
 .bottom input:focus{
     outline: none;
 
+}
+
+.bottom i{
+    cursor: pointer;
 }
 
 .invisible{
