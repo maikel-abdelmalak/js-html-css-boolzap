@@ -123,6 +123,7 @@ main{
     padding-left: 5px;
     border:none;
     color:#b1b1b1;
+    width: calc(100% - 59px);
 }
 
 .cerca input:focus{
