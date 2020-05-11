@@ -11,7 +11,6 @@ main{
     font-family: 'Roboto', sans-serif;
 }
 
-
 .container{
     /* width: 80%; */
     width: 1220px;
@@ -77,6 +76,10 @@ main{
     padding-left: 20px;
 }
 
+.contact-container .account:hover, .contact-container  .account:focus{
+    background-color:  #eaeaea;
+}
+
 .notifiche{
     background-color: #8edafc;
     color: #8edafc;
@@ -135,7 +138,6 @@ main{
     border-top: 1px solid #dadada;
 }
 
-
 #chat{
     float: left;
     width: 65%;
@@ -191,7 +193,6 @@ main{
     border-right: 33px solid transparent;
 }
 
-
 .ricevuti{
     background-color: #fff;
     float: left;
@@ -213,22 +214,20 @@ main{
     color:#8edafc;
 }
 
-
 .bottom{
     height: 60px;
     background-color: #f3eeea;
     display: flex;
-    padding:  30px;
+    padding:  20px;
     align-items: center;
     justify-content: space-between;
     color:#687076;
     font-size: 20px;
-
 }
 
 .bottom input{
     border: none;
-    margin: 0 30px;
+    margin: 0 20px;
     flex-grow: 2;
     height: 38px;
     border-radius: 5px;
@@ -242,8 +241,13 @@ main{
 
 .bottom i{
     cursor: pointer;
+    padding: 10px;
 }
 
 .invisible{
     display: none !important;
+}
+
+.template{
+    display: none;
 }
