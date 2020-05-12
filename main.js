@@ -15,7 +15,7 @@ $(document).ready(function(){
         }
 
     });
-//on click sull'icona e premendo invio richiamo la funzione crea_messaggio
+//on click sull'icona oppure premendo invio richiamo la funzione crea_messaggio
     $('.fa-google-play').click(crea_messaggio);
 
     $('.bottom input').keypress(function(e) {
@@ -25,7 +25,10 @@ $(document).ready(function(){
     });
 
 
+    show_dropdown();
 
+
+//FUNZIONI
     function crea_messaggio(){
         //salvo in testo il val inserito daal'utente
         var testo = $('.bottom input').val();
@@ -53,10 +56,34 @@ $(document).ready(function(){
                 $('.text-container .messaggio.ricevuti:last-child p').text(frasi_risposta[indice]);
             }, 1000)
         }
+        show_dropdown();
     }
 
     function crea_random(min, max){
         return Math.floor(Math.random() * max - min +1) + min;
     }
-
+//funzione per far apparire sparire il dropdown
+    function show_dropdown(){
+        //se clicco su un messaggio inviato chiudo eventuali dropdown aperti e  visualizzo il dropdown del messaggio cliccato
+        $('.text-container .inviati').click(function(){
+            $('.dropdown').addClass('invisible');
+            var menu = $(this).find('.dropdown');
+            menu.removeClass('invisible');
+        });
+        //se clicco su remove Message aggiungo la classe ms_cancellato e cambio il testo del messaggio corrente con 'messaggio cancellato'
+        $('.dropdown ul li:last-child').click(function(){
+            var ms_corrente = $(this).parents('.inviati')
+            ms_corrente.addClass('ms-cancellato')
+            ms_corrente.find('p').text('questo messaggio è stato cancellato')
+            ms_corrente.find('.info-ms').hide();
+            ms_corrente.find('.dropdown').hide()
+        });
+        //se clicco fuori dal messaggio il dropdown scompare
+        $(document).click(function(event){
+            var target =  $(event.target);
+            if(!target.hasClass('show')){
+                $('.dropdown').addClass('invisible');
+            }
+        });
+    }
 })

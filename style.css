@@ -176,6 +176,25 @@ main{
     position: relative;
 }
 
+.dropdown{
+    position: absolute;
+    bottom: -65px;
+    right: 20px;
+    width: 150px;
+    font-size: 13px;
+    background-color: #fff;
+}
+
+.dropdown li{
+    padding: 10px 15px;
+    list-style: none;
+    cursor: pointer;
+}
+
+.dropdown li:hover{
+    background-color: #eaeaea;
+}
+
 .ricevuti::before{
     content: "";
     position: absolute;
@@ -251,4 +270,10 @@ main{
 
 .template{
     display: none;
+}
+
+.ms-cancellato{
+    padding-bottom: 10px;
+    color:#b1b1b1;
+    font-size: 12px;
 }
