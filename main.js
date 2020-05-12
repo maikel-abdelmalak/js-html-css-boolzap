@@ -22,10 +22,43 @@ $(document).ready(function(){
       if (e.which == 13) {
         crea_messaggio();
       }
+  });
+
+//
+    show_dropdown();
+//cliccando sull'icona o digitando qualsiasi tasto richiamo la funzione cerca_contatto
+    $('.cerca input').keypress(function() {
+          var inputp = $('.cerca input').val()
+          cerca_contatto(inputp);
+    });
+    $('.cerca span').click(function() {
+          var inputp = $('.cerca input').val()
+          cerca_contatto(inputp);
     });
 
 
-    show_dropdown();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //FUNZIONI
@@ -86,4 +119,29 @@ $(document).ready(function(){
             }
         });
     }
+//funzione per la ricerca del contatto
+    function cerca_contatto(input){
+        //rendo minuscolo l'input
+        input = input.toLowerCase();
+        //se l'input non è vuoto
+        if(input != ''){
+            //per ogni account prendo il nome e vedo se inizia con 'l'input
+            $('.contact-container .account .account-name p:first-child').each(function(){
+                //leggo il contenuto del p e lo rendo minuscolo
+                var nome = $(this).text();
+                nome = nome.toLowerCase();
+                //faccio sparire gli account con nomi diversi dall'input
+                // if(!nome.includes(input)){
+                //     $(this).parents('.account').hide();
+                // }
+                //usando startsWith e non include
+                if(!nome.startsWith(input)){
+                    $(this).parents('.account').hide();
+                }
+            })
+        }else{
+            $('.contact-container .account').show()
+        }
+    }
+
 })
