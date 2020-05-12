@@ -74,6 +74,7 @@ main{
     display: flex;
     align-items: center;
     padding-left: 20px;
+    cursor: pointer;
 }
 
 .contact-container .account:hover, .contact-container  .account:focus{
@@ -134,6 +135,10 @@ main{
 .contact-container{
     overflow-y: scroll;
     height: calc(100% - 170px);
+}
+
+.height-large{
+    height: calc(100% - 100px);
 }
 
 .contact-container .account{

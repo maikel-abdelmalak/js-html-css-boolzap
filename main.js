@@ -24,6 +24,28 @@ $(document).ready(function(){
       }
   });
 
+
+$('.contact-container .account').click(function(){
+    var nome = $(this).find('.account-name p:first-child').text()
+    var url_img = $(this).find('.avatar img').attr('src');
+    $('#chat .header .account-name p:first-child').text(nome);
+    $('#chat .header .avatar img').attr('src', url_img);
+
+    $('#chat .text-container').each(function(){
+        var title = $(this).attr('title');
+        console.log(title);
+        if(title != nome){
+            $('#chat .text-container').hide();
+            var nuova_chat = $('.template .text-container').clone();
+            nuova_chat.attr('title', nome);
+            nuova_chat.insertAfter('#chat .header')
+        }
+    })
+
+
+})
+
+
 //
     show_dropdown();
 //cliccando sull'icona o digitando qualsiasi tasto richiamo la funzione cerca_contatto
@@ -36,28 +58,11 @@ $(document).ready(function(){
           cerca_contatto(inputp);
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//cliccando sul link del div notifiche sparisce
+$('#contatti .notifiche a').click(function(){
+    $('#contatti .notifiche').hide();
+    $('.contact-container').addClass('height-large');
+})
 
 
 
