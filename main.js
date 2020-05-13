@@ -24,39 +24,35 @@ $(document).ready(function(){
       }
   });
 
-
+//cliccando su un account apro la chat corrispondente se esiste altrimenti la creo e modifico i dati nell'header
 $('.contact-container .account').click(function(){
     var nome = $(this).find('.account-name p:first-child').text()
     var url_img = $(this).find('.avatar img').attr('src');
     $('#chat .header .account-name p:first-child').text(nome);
     $('#chat .header .avatar img').attr('src', url_img);
 
-    $('#chat .text-container').each(function(){
-        var title = $(this).attr('title');
-        console.log(title);
-        if(title != nome){
-            $('#chat .text-container').hide();
-            var nuova_chat = $('.template .text-container').clone();
-            nuova_chat.attr('title', nome);
-            nuova_chat.insertAfter('#chat .header')
-        }
-    })
-
+    var chat = $('[data-nome= '+ nome +']')
+    if(chat.length == 0){
+        nuova_chat(nome);
+    }else{
+        $('.text-container').hide()
+        chat.show()
+    }
 
 })
 
 
-//
-    show_dropdown();
 //cliccando sull'icona o digitando qualsiasi tasto richiamo la funzione cerca_contatto
-    $('.cerca input').keypress(function() {
-          var inputp = $('.cerca input').val()
-          cerca_contatto(inputp);
+    $('.cerca input').keypress(function(e) {
+          var input = $('.cerca input').val()
+         if (e.which == 13){
+              cerca_contatto(input);}
     });
     $('.cerca span').click(function() {
-          var inputp = $('.cerca input').val()
-          cerca_contatto(inputp);
+          var input = $('.cerca input').val()
+          cerca_contatto(input);
     });
+
 
 //cliccando sul link del div notifiche sparisce
 $('#contatti .notifiche a').click(function(){
@@ -65,17 +61,16 @@ $('#contatti .notifiche a').click(function(){
 })
 
 
-
 //FUNZIONI
     function crea_messaggio(){
         //salvo in testo il val inserito daal'utente
         var testo = $('.bottom input').val();
-
+        var nome_account = $('#chat .header .account-name p:first-child').text()
         if(testo != ''){
             //clono il messaggio dal template
             var nuovo_messaggio = $('.template .messaggio.inviati').clone();
             //con append inserisco il messaggio nel documento
-            $('.text-container').append(nuovo_messaggio);
+            $('[data-nome= '+ nome_account +']').append(nuovo_messaggio);
             //inserisco nel messaggio il testo dell'utente
             $('.text-container .messaggio.inviati:last-child p').text(testo);
             //risetto il val dell'input a vuoto
@@ -89,7 +84,7 @@ $('#contatti .notifiche a').click(function(){
                 //clono il messaggio di risposta
                 var nuova_risposta = $('.template .messaggio.ricevuti').clone();
                 //con append inserisco il messaggio nel documento
-                $('.text-container').append(nuova_risposta);
+                $('[data-nome= '+ nome_account +']').append(nuova_risposta);
                 //inserisco nel messaggio la risposta con l'indice estratto
                 $('.text-container .messaggio.ricevuti:last-child p').text(frasi_risposta[indice]);
             }, 1000)
@@ -148,5 +143,18 @@ $('#contatti .notifiche a').click(function(){
             $('.contact-container .account').show()
         }
     }
+//funzione crea nuova chat
+    function nuova_chat(data){
+        //clono la nuova chat dal template
+        var nuova_chat = $('.template .text-container').clone();
+        //le aggiungo l'attributo data e come valore inserisco il nome del contatto
+        nuova_chat.attr('data-nome', '' + data + '');
+        //nascondo eventuali chat aperte
+        $('.text-container').hide();
+        //appendo la nuova chat
+        nuova_chat.insertAfter('#chat .header');
+        //e la visualizzo
+        nuova_chat.show();
 
+    }
 })
