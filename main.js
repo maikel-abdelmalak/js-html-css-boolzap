@@ -15,6 +15,7 @@ $(document).ready(function(){
         }
 
     });
+
 //on click sull'icona oppure premendo invio richiamo la funzione crea_messaggio
     $('.fa-google-play').click(crea_messaggio);
 
@@ -23,24 +24,6 @@ $(document).ready(function(){
         crea_messaggio();
       }
   });
-
-//cliccando su un account apro la chat corrispondente se esiste altrimenti la creo e modifico i dati nell'header
-$('.contact-container .account').click(function(){
-    var nome = $(this).find('.account-name p:first-child').text()
-    var url_img = $(this).find('.avatar img').attr('src');
-    $('#chat .header .account-name p:first-child').text(nome);
-    $('#chat .header .avatar img').attr('src', url_img);
-
-    var chat = $('[data-nome= '+ nome +']')
-    if(chat.length == 0){
-        nuova_chat(nome);
-    }else{
-        $('.text-container').hide()
-        chat.show()
-    }
-
-})
-
 
 //cliccando sull'icona o digitando qualsiasi tasto richiamo la funzione cerca_contatto
     $('.cerca input').keypress(function(e) {
@@ -61,11 +44,36 @@ $('#contatti .notifiche a').click(function(){
 })
 
 
+//cliccando su un account apro la chat corrispondente se esiste altrimenti la creo e modifico i dati nell'header
+$('.contact-container .account').click(function(){
+    var nome = $(this).find('.account-name p:first-child').text()
+    var url_img = $(this).find('.avatar img').attr('src');
+    $('#chat .header .account-name p:first-child').text(nome);
+    $('#chat .header .avatar img').attr('src', url_img);
+    var orario = ora();
+    $('#chat .header .account-name p:last-child span').text(orario);
+    var chat = $('[data-nome= '+ nome +']')
+    if(chat.length == 0){
+        nuova_chat(nome);
+    }else{
+        $('.text-container').hide()
+        chat.show()
+    }
+})
+
+$('.text-container').each(function(){
+
+    var ultimo_ms = $(this).parents('.ricevuti p').text();
+    console.log(ultimo_ms);
+})
+
+
 //FUNZIONI
     function crea_messaggio(){
         //salvo in testo il val inserito daal'utente
         var testo = $('.bottom input').val();
         var nome_account = $('#chat .header .account-name p:first-child').text()
+        var orario = ora();
         if(testo != ''){
             //clono il messaggio dal template
             var nuovo_messaggio = $('.template .messaggio.inviati').clone();
@@ -73,20 +81,28 @@ $('#contatti .notifiche a').click(function(){
             $('[data-nome= '+ nome_account +']').append(nuovo_messaggio);
             //inserisco nel messaggio il testo dell'utente
             $('.text-container .messaggio.inviati:last-child p').text(testo);
+            //inserisco l'orario
+            $('.text-container .messaggio.inviati:last-child .info-ms span').text(orario);
             //risetto il val dell'input a vuoto
             $('.bottom input').val('');
             //timeout per inserire il messaggio di risposta
             setTimeout(function(){
+                //dopo un secondo visualizzo le due spunte blu
+                nuovo_messaggio.find('.fa-check-double').removeClass('invisible');
+                nuovo_messaggio.find('.fa-check').addClass('invisible')
                 //creo un array contenente le risposte
-                var frasi_risposta = ['ok!', 'bravo', 'va bene', 'non mi scrivere più'];
+                var frasi_risposta = ['ok!', 'bravo', 'va bene', 'non mi scrivere più', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'];
                 //estraggo casualmente l'indice della risposta
-                var indice = crea_random(0, 3);
+                var indice = crea_random(0, 4);
                 //clono il messaggio di risposta
                 var nuova_risposta = $('.template .messaggio.ricevuti').clone();
                 //con append inserisco il messaggio nel documento
                 $('[data-nome= '+ nome_account +']').append(nuova_risposta);
                 //inserisco nel messaggio la risposta con l'indice estratto
                 $('.text-container .messaggio.ricevuti:last-child p').text(frasi_risposta[indice]);
+                //inserisco l'orario
+                $('.text-container .messaggio.ricevuti:last-child .info-ms span').text(orario);
+
             }, 1000)
         }
         show_dropdown();
@@ -156,5 +172,19 @@ $('#contatti .notifiche a').click(function(){
         //e la visualizzo
         nuova_chat.show();
 
+    }
+//funzione di recupero ora
+    function ora(){
+        var d = new Date();
+        var ora = d.getHours();
+        var minuti = d.getMinutes();
+        if(minuti < 10){
+            minuti = '0' + minuti
+        };
+        if(ora < 10){
+            ora = '0' + ora
+        };
+        var orario = ora + ':' + minuti;
+        return orario
     }
 })
