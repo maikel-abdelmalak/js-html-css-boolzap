@@ -111,7 +111,7 @@ $('.text-container').each(function(){
     function crea_random(min, max){
         return Math.floor(Math.random() * max - min +1) + min;
     }
-//funzione per far apparire sparire il dropdown
+//funzione per far apparire sparire il dropdown e ne gestisce il funzionamento
     function show_dropdown(){
         //se clicco su un messaggio inviato chiudo eventuali dropdown aperti e  visualizzo il dropdown del messaggio cliccato
         $('.text-container .inviati').click(function(){
