@@ -77,6 +77,14 @@ main{
     cursor: pointer;
 }
 
+#contatti .contact-container .account-name p:last-child{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 1.3em;
+    white-space: nowrap;
+    width: 210px;
+}
+
 .contact-container .account:hover, .contact-container  .account:focus{
     background-color:  #eaeaea;
 }
@@ -282,4 +290,12 @@ main{
     padding-bottom: 10px;
     color:#b1b1b1;
     font-size: 12px;
+}
+
+.ora-account{
+    width: 100px;
+    margin-bottom: 20px;
+    text-align: right;
+    color: #999;
+    font-size: 15px;
 }

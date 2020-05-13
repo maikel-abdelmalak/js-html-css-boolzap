@@ -46,12 +46,17 @@ $('#contatti .notifiche a').click(function(){
 
 //cliccando su un account apro la chat corrispondente se esiste altrimenti la creo e modifico i dati nell'header
 $('.contact-container .account').click(function(){
+    //recupero il nome e l'avatar del cerca_contatto
     var nome = $(this).find('.account-name p:first-child').text()
     var url_img = $(this).find('.avatar img').attr('src');
+    //e gli aggiungo nell'header della chat
     $('#chat .header .account-name p:first-child').text(nome);
     $('#chat .header .avatar img').attr('src', url_img);
+    //setto l'ora dell'ultimo accesso alla chat sia nell'header che nello span dell'account
     var orario = ora();
     $('#chat .header .account-name p:last-child span').text(orario);
+    $('[data-ua= '+ nome +']').find('.ora-account').text(orario);
+    //se al contatto corrisponde un text-container lo visualizzo altrimenti lo creo
     var chat = $('[data-nome= '+ nome +']')
     if(chat.length == 0){
         nuova_chat(nome);
@@ -60,13 +65,6 @@ $('.contact-container .account').click(function(){
         chat.show()
     }
 })
-
-$('.text-container').each(function(){
-
-    var ultimo_ms = $(this).parents('.ricevuti p').text();
-    console.log(ultimo_ms);
-})
-
 
 //FUNZIONI
     function crea_messaggio(){
@@ -100,6 +98,8 @@ $('.text-container').each(function(){
                 $('[data-nome= '+ nome_account +']').append(nuova_risposta);
                 //inserisco nel messaggio la risposta con l'indice estratto
                 $('.text-container .messaggio.ricevuti:last-child p').text(frasi_risposta[indice]);
+                //inserisco il testo dell'ultimo messaggio nell'account corrispondente nella sezione di sinistra
+                $('[data-ua= '+ nome_account +']').find('.account-name p:last-child').text(frasi_risposta[indice]);
                 //inserisco l'orario
                 $('.text-container .messaggio.ricevuti:last-child .info-ms span').text(orario);
 
