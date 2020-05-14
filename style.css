@@ -197,6 +197,7 @@ main{
     width: 150px;
     font-size: 13px;
     background-color: #fff;
+    z-index: 999;
 }
 
 .dropdown li{
@@ -298,4 +299,27 @@ main{
     text-align: right;
     color: #999;
     font-size: 15px;
+}
+
+/* aggiungi nuovo contatto */
+
+.cerca{
+    position: relative;
+}
+
+.dropdown-contatti{
+    position: absolute;
+    top: 70px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    color: #111;
+    text-align: center;
+    z-index: 9999;
+    border: 1px solid #b1b1b1;
+}
+
+.dropdown-contatti input{
+    margin-bottom: 20px;
+    display: block;
 }

@@ -44,6 +44,8 @@ $('#contatti .notifiche a').click(function(){
 })
 
 
+
+
 //cliccando su un account apro la chat corrispondente se esiste altrimenti la creo e modifico i dati nell'header
 $('.contact-container .account').click(function(){
     //recupero il nome e l'avatar del cerca_contatto
@@ -66,6 +68,62 @@ $('.contact-container .account').click(function(){
     }
 })
 
+
+
+
+//aggiungi contatto nuovo
+$('.aggiungi-contatto').click(function(){
+
+    $('.dropdown-contatti').toggleClass('invisible')
+})
+
+$('.dropdown-contatti button').click(function(){
+    var nome = $('.dropdown-contatti input:first-of-type').val()
+    var foto = $('.dropdown-contatti input:last-of-type').val()
+
+    if(nome != '' && foto != '' && !isNaN(foto) && (foto>0 && foto<11)){
+        foto = 'img/avatar'+foto+'.png'
+        var nuovo_contatto = $('.template .account').clone()
+
+        nuovo_contatto.find('.account-name p:first-child').text(nome)
+        nuovo_contatto.attr('data-ua', nome)
+        nuovo_contatto.find('.avatar img').attr('src', foto);
+
+        $('.contact-container').prepend(nuovo_contatto);
+        $('.dropdown-contatti').addClass('invisible');
+        $('.dropdown-contatti input').val('')
+
+
+        $('.contact-container .account').click(function(){
+            //recupero il nome e l'avatar del cerca_contatto
+            var nome = $(this).find('.account-name p:first-child').text()
+            var url_img = $(this).find('.avatar img').attr('src');
+            //e gli aggiungo nell'header della chat
+            $('#chat .header .account-name p:first-child').text(nome);
+            $('#chat .header .avatar img').attr('src', url_img);
+            //setto l'ora dell'ultimo accesso alla chat sia nell'header che nello span dell'account
+            var orario = ora();
+            $('#chat .header .account-name p:last-child span').text(orario);
+            $('[data-ua= '+ nome +']').find('.ora-account').text(orario);
+            //se al contatto corrisponde un text-container lo visualizzo altrimenti lo creo
+            var chat = $('[data-nome= '+ nome +']')
+            if(chat.length == 0){
+                nuova_chat(nome);
+            }else{
+                $('.text-container').hide()
+                chat.show()
+            }
+        })
+
+
+    }else{
+        alert('hai inserto valori non validi');
+        $('.dropdown-contatti').addClass('invisible')
+        $('.dropdown-contatti input').val('')
+    }
+
+})
+//fine aggiungi nuovo_contatto
 //FUNZIONI
     function crea_messaggio(){
         //salvo in testo il val inserito daal'utente
