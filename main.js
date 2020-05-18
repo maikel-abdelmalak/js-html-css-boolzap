@@ -140,11 +140,14 @@ $('.dropdown-contatti button').click(function(){
              $('.bottom input').val('');
              //     //timeout per inserire il messaggio di risposta
                  setTimeout(function(){
-                     context = {testo: testo, ora: orario, tipo: 'inviati', icona2: '', icona: 'invisible'};
-
                      //dopo un secondo visualizzo le due spunte blu
+                    var te = $('[data-nome= '+ nome_account +'] .inviati .info-ms .fa-check').addClass('invisible')
+
+                     $('[data-nome= '+ nome_account +'] .inviati .info-ms .fa-check-double').removeClass('invisible')
+
                      // html.find('.fa-check-double').removeClass('invisible');
                      // html.find('.fa-check').addClass('invisible')
+
                      //creo un array contenente le risposte
                      var frasi_risposta = ['ok!', 'bravo', 'va bene', 'non mi scrivere più', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'];
                      //estraggo casualmente l'indice della risposta
