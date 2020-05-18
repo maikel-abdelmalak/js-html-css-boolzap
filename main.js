@@ -166,7 +166,7 @@ $('.dropdown-contatti button').click(function(){
 
                  }, 1000)
         }
-
+//VERSIONE SENZA Handlebars
         // var nome_account = $('#chat .header .account-name p:first-child').text()
         // var orario = ora();
         // if(testo != ''){
