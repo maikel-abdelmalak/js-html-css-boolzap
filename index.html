@@ -7,6 +7,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/af17121d24.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js" integrity="sha256-usTqAE1ywvdMtksWzdeWzD75MsfJN0h0U7y2NtZL3N0=" crossorigin="anonymous"></script>
         <script src="main.js" charset="utf-8"></script>
     </head>
     <body>
@@ -150,8 +151,9 @@
                 </div>
             </div>
         </main>
+
         <div class="template">
-            <div class="show messaggio inviati">
+            <!-- <div class="show messaggio inviati">
                 <p class="show">lorem</p>
                 <div class="show info-ms">
                     <span>17:30</span>
@@ -164,14 +166,14 @@
                         <li>Delete Message</li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="messaggio ricevuti">
+            <!-- <div class="messaggio ricevuti">
                  <p>ok!</p>
                  <div class="info-ms">
                      <span>17:30</span>
                  </div>
-            </div>
+            </div> -->
 
             <div class="text-container" data-nome="">
             </div>
@@ -188,5 +190,23 @@
             </div>
         </div>
         </div>
+
+
+        <script id="message-template" type="text/x-handlebars-template">
+            <div class="show messaggio {{tipo}}">
+                <p class="show">{{testo}}</p>
+                <div class="show info-ms">
+                    <span>{{ora}}</span>
+                    <i class="{{icona}} fas fa-check"></i>
+                    <i class="{{icona2}} letto fas fa-check-double"></i>
+                </div>
+                <div class="dropdown invisible">
+                    <ul>
+                        <li>Message Info</li>
+                        <li>Delete Message</li>
+                    </ul>
+                </div>
+            </div>
+        </script>>
     </body>
 </html>

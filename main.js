@@ -126,43 +126,79 @@ $('.dropdown-contatti button').click(function(){
 //fine aggiungi nuovo_contatto
 //FUNZIONI
     function crea_messaggio(){
-        //salvo in testo il val inserito daal'utente
+        //salvo in testo il val inserito dall'utente
         var testo = $('.bottom input').val();
         var nome_account = $('#chat .header .account-name p:first-child').text()
         var orario = ora();
-        if(testo != ''){
-            //clono il messaggio dal template
-            var nuovo_messaggio = $('.template .messaggio.inviati').clone();
-            //con append inserisco il messaggio nel documento
-            $('[data-nome= '+ nome_account +']').append(nuovo_messaggio);
-            //inserisco nel messaggio il testo dell'utente
-            $('.text-container .messaggio.inviati:last-child p').text(testo);
-            //inserisco l'orario
-            $('.text-container .messaggio.inviati:last-child .info-ms span').text(orario);
-            //risetto il val dell'input a vuoto
-            $('.bottom input').val('');
-            //timeout per inserire il messaggio di risposta
-            setTimeout(function(){
-                //dopo un secondo visualizzo le due spunte blu
-                nuovo_messaggio.find('.fa-check-double').removeClass('invisible');
-                nuovo_messaggio.find('.fa-check').addClass('invisible')
-                //creo un array contenente le risposte
-                var frasi_risposta = ['ok!', 'bravo', 'va bene', 'non mi scrivere più', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'];
-                //estraggo casualmente l'indice della risposta
-                var indice = crea_random(0, 4);
-                //clono il messaggio di risposta
-                var nuova_risposta = $('.template .messaggio.ricevuti').clone();
-                //con append inserisco il messaggio nel documento
-                $('[data-nome= '+ nome_account +']').append(nuova_risposta);
-                //inserisco nel messaggio la risposta con l'indice estratto
-                $('.text-container .messaggio.ricevuti:last-child p').text(frasi_risposta[indice]);
-                //inserisco il testo dell'ultimo messaggio nell'account corrispondente nella sezione di sinistra
-                $('[data-ua= '+ nome_account +']').find('.account-name p:last-child').text(frasi_risposta[indice]);
-                //inserisco l'orario
-                $('.text-container .messaggio.ricevuti:last-child .info-ms span').text(orario);
 
-            }, 1000)
+        if(testo != ''){
+            var source   = $('#message-template').html();
+            var template = Handlebars.compile(source);
+            var context = {testo: testo, ora: orario, tipo: 'inviati', icona2: 'invisible'};
+            var html = template(context);
+            $('[data-nome= '+ nome_account +']').append(html)
+             $('.bottom input').val('');
+             //     //timeout per inserire il messaggio di risposta
+                 setTimeout(function(){
+                     context = {testo: testo, ora: orario, tipo: 'inviati', icona2: '', icona: 'invisible'};
+
+                     //dopo un secondo visualizzo le due spunte blu
+                     // html.find('.fa-check-double').removeClass('invisible');
+                     // html.find('.fa-check').addClass('invisible')
+                     //creo un array contenente le risposte
+                     var frasi_risposta = ['ok!', 'bravo', 'va bene', 'non mi scrivere più', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'];
+                     //estraggo casualmente l'indice della risposta
+                     var indice = crea_random(0, 4);
+                     //clono il messaggio di risposta
+                     var source2   = $('#message-template').html();
+                     var template2 = Handlebars.compile(source2);
+                     var context2 = {testo: frasi_risposta[indice], ora: orario, tipo: 'ricevuti', icona: 'invisible', icona2: 'invisible'};
+                     var html2 = template(context2);
+                     $('[data-nome= '+ nome_account +']').append(html2)
+
+
+                     //inserisco il testo dell'ultimo messaggio nell'account corrispondente nella sezione di sinistra
+                     $('[data-ua= '+ nome_account +']').find('.account-name p:last-child').text(frasi_risposta[indice]);
+                      $('[data-ua= '+ nome_account +']').find('.ora-account').text(orario)
+
+                 }, 1000)
         }
+
+        // var nome_account = $('#chat .header .account-name p:first-child').text()
+        // var orario = ora();
+        // if(testo != ''){
+        //     //clono il messaggio dal template
+        //     var nuovo_messaggio = $('.template .messaggio.inviati').clone();
+        //     //con append inserisco il messaggio nel documento
+        //     $('[data-nome= '+ nome_account +']').append(nuovo_messaggio);
+        //     //inserisco nel messaggio il testo dell'utente
+        //     $('.text-container .messaggio.inviati:last-child p').text(testo);
+        //     //inserisco l'orario
+        //     $('.text-container .messaggio.inviati:last-child .info-ms span').text(orario);
+        //     //risetto il val dell'input a vuoto
+        //     $('.bottom input').val('');
+        //     //timeout per inserire il messaggio di risposta
+        //     setTimeout(function(){
+        //         //dopo un secondo visualizzo le due spunte blu
+        //         nuovo_messaggio.find('.fa-check-double').removeClass('invisible');
+        //         nuovo_messaggio.find('.fa-check').addClass('invisible')
+        //         //creo un array contenente le risposte
+        //         var frasi_risposta = ['ok!', 'bravo', 'va bene', 'non mi scrivere più', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'];
+        //         //estraggo casualmente l'indice della risposta
+        //         var indice = crea_random(0, 4);
+        //         //clono il messaggio di risposta
+        //         var nuova_risposta = $('.template .messaggio.ricevuti').clone();
+        //         //con append inserisco il messaggio nel documento
+        //         $('[data-nome= '+ nome_account +']').append(nuova_risposta);
+        //         //inserisco nel messaggio la risposta con l'indice estratto
+        //         $('.text-container .messaggio.ricevuti:last-child p').text(frasi_risposta[indice]);
+        //         //inserisco il testo dell'ultimo messaggio nell'account corrispondente nella sezione di sinistra
+        //         $('[data-ua= '+ nome_account +']').find('.account-name p:last-child').text(frasi_risposta[indice]);
+        //         //inserisco l'orario
+        //         $('.text-container .messaggio.ricevuti:last-child .info-ms span').text(orario);
+        //
+        //     }, 1000)
+        // }
         show_dropdown();
     }
 
